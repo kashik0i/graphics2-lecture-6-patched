@@ -21,7 +21,7 @@
     ```
 +   Changed `RotateX, RotateY and RotateZ` to accept `_3DModel` as first parameter instead of list of points
 
-+ Fixed Translate method calling according to its segneture
++ Fixed Translate method calling according to its signature
     ```c#
     Transform.Translate(L_Pts,0,0, v1.z * 1);//Returns the Z values of v1 to original place
     Transform.Translate(L_Pts,0, v1.y * 1,0);//Returns the Y values of v1 to original place
