@@ -18,8 +18,8 @@ namespace Lec3
         Bitmap offscreen;
 
         Camera cam = new Camera();
-        _3DModel model;
-        _3DModel []cubes= new _3DModel[3];
+        Model3D model;
+        Model3D []cubes= new Model3D[3];
        
         
         public Form1()
@@ -56,8 +56,6 @@ namespace Lec3
                     break;
                 case Keys.T:
                     Transform.RotateArbitrary(cubes[1], cubes[0].points[3], cubes[0].points[7], 1);
-                    //Transform.Rotateall(cubes[2], cubes[0].points[3], cubes[0].points[7], 1);
-                    //Transform.Rotateall(cubes[0], cubes[0].points[3], cubes[0].points[7], 1);
                     break;
 
             }
@@ -73,7 +71,7 @@ namespace Lec3
         private void Form1_Load(object sender, EventArgs e)
         {
             offscreen = new Bitmap(Width, Height);
-            model = new _3DModel();
+            model = new Model3D();
             
             cam.ceneterX = XB + (cx / 2);
             cam.ceneterY = YB + (cy / 2);
@@ -81,7 +79,7 @@ namespace Lec3
             cam.cyScreen = cy;
             for (int i = 0; i < 3; i++)
             {
-                cubes[i] = new _3DModel();
+                cubes[i] = new Model3D();
 
                 Transform.Scale(cubes[i], 0.2f, 0.2f, 0.2f);
 
@@ -91,7 +89,9 @@ namespace Lec3
                 cubes[i].cam = cam;
             }
             model.cam = cam;
+
             cam.BuildNewSystem();
+
             DrawDoubleBuffer(CreateGraphics());
             
         }

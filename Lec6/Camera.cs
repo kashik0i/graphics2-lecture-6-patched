@@ -8,54 +8,54 @@ namespace Lec3
 {
     class Camera
     {
-        public _3dpoint cop;
-        public _3dpoint lookAt;
-        public _3dpoint up;
+        public Point3D cop;
+        public Point3D lookAt;
+        public Point3D up;
         public double  front, back;
 
         public float focal = 3;
 
 
         // vectors
-        public _3dpoint basisa, lookDir, basisc;
+        public Point3D basisa, lookDir, basisc;
 
         public int ceneterX, ceneterY;
         public int cxScreen, cyScreen;
 
         public Camera()
         {
-            cop = new _3dpoint(0, 0, -350); // new Point3D(0, -50, 0);
-            lookAt = new _3dpoint(0, 0, 50);     //new Point3D(0, 50, 0);
-            up = new _3dpoint(0, 1, 0);
+            cop = new Point3D(0, 0, -350); // new Point3D(0, -50, 0);
+            lookAt = new Point3D(0, 0, 50);     //new Point3D(0, 50, 0);
+            up = new Point3D(0, 1, 0);
             front = 10; // 70.0;
             back = 300.0;
         }
 
         public void BuildNewSystem()
         {
-            lookDir = new _3dpoint(0, 0, 0);
-            basisa = new _3dpoint(0, 0, 0);
-            basisc = new _3dpoint(0, 0, 0);
+            lookDir = new Point3D(0, 0, 0);
+            basisa = new Point3D(0, 0, 0);
+            basisc = new Point3D(0, 0, 0);
 
             //Calculate Vector LookDir
             lookDir.x = lookAt.x - cop.x;
             lookDir.y = lookAt.y - cop.y;
             lookDir.z = lookAt.z - cop.z;
             //Normalise between 0-1
-            Matrix.Normalise(lookDir);
+            Matrix.Normalize(ref lookDir);
 
             //Cross product between up and lookDir to get new vector that is perpindicular to both and normalise
             basisa = Matrix.CrossProduct(up, lookDir);
-            Matrix.Normalise(basisa);
+            Matrix.Normalize(ref basisa);
 
             //Cross product between lookDir and basisa(previous vector) to get new vector that is perpindicular to both and normalise
             basisc = Matrix.CrossProduct(lookDir, basisa);
-            Matrix.Normalise(basisc);
+            Matrix.Normalize(ref basisc);
         }
 
-        public void TransformToOrigin_And_Rotate(_3dpoint a, _3dpoint e)
+        public void TransformToOrigin_And_Rotate(Point3D a, Point3D e)
         {
-            _3dpoint w = new _3dpoint(a.x , a.y , a.z);
+            Point3D w = new Point3D(a.x , a.y , a.z);
             //Translate to origin
             w.x -= cop.x;
             w.y -= cop.y;
@@ -67,14 +67,14 @@ namespace Lec3
             e.z = w.x * lookDir.x + w.y * lookDir.y + w.z * lookDir.z;            
         }
        
-        public PointF TransformToOrigin_And_Rotate_And_Project(_3dpoint w1)
+        public PointF TransformToOrigin_And_Rotate_And_Project(Point3D w1)
         {
-            _3dpoint e1, n1;
-            e1 = new _3dpoint(0, 0, 0);
-            n1 = new _3dpoint(0, 0, 0);
+            Point3D e1, n1;
+            e1 = new Point3D(0, 0, 0);
+            n1 = new Point3D(0, 0, 0);
 
             TransformToOrigin_And_Rotate(w1, e1);
-            Parallel.DoPrespectiveProjection(e1, n1, focal);
+            Projection.DoPrespectiveProjection(e1, n1, focal);
 
             // view mapping
             n1.x = (int)(ceneterX + cxScreen * n1.x / 2);

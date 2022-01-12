@@ -6,30 +6,30 @@ using System.Threading.Tasks;
 
 namespace Lec3
 {
-     static class Parallel
+     static class Projection
     {
-        public static List<_2dpoint> a;
-        public static List<_2dpoint> Get(List<_3dpoint> point)
+        public static List<Point2D> a;
+        public static List<Point2D> Get(List<Point3D> point)
         {
-            a = new List<_2dpoint>();
+            a = new List<Point2D>();
             for (int i = 0; i < point.Count; i++)
             {
-                a.Add(new _2dpoint((float)point[i].x, (float)point[i].y));
+                a.Add(new Point2D((float)point[i].x, (float)point[i].y));
             }
             return a;
         }
-        public static List<_2dpoint> Prespective(ref List<_3dpoint> point)
+        public static List<Point2D> Prespective(ref List<Point3D> point)
         {
-            a = new List<_2dpoint>();
+            a = new List<Point2D>();
             for (int i = 0; i < point.Count; i++)
             {
                 float yp = (float)(point[i].y * (200 / point[i].z));
                 float xp = (float)(point[i].x * (200 / point[i].z));
-                a.Add(new _2dpoint(xp, yp));
+                a.Add(new Point2D(xp, yp));
             }
             return a;
         }
-        public static void DoPrespectiveProjection(_3dpoint e, _3dpoint n, float focal)//Calculate the presepctive projection equations
+        public static void DoPrespectiveProjection(Point3D e, Point3D n, float focal)//Calculate the presepctive projection equations
         {
             n.x = focal * e.x / e.z;
             n.y = focal * e.y / e.z;

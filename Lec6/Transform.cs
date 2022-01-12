@@ -11,7 +11,7 @@ namespace Lec3
         public Transform()
         {
         }
-        public static void Scale(_3DModel a, float sx, float sy, float sz)//Resize the object, either bigger or smaller
+        public static void Scale(Model3D a, double sx, double sy, double sz)//Resize the object, either bigger or smaller
         {
             for (int i = 0; i < a.points.Count; i++)
             {
@@ -21,7 +21,7 @@ namespace Lec3
 
             }
         }
-        public static void Translate(_3DModel a,double xr, double yr, double zr)
+        public static void Translate(Model3D a,double xr, double yr, double zr)
         {
             for (int i = 0; i < a.points.Count; i++)
             {
@@ -31,9 +31,9 @@ namespace Lec3
 
             }
         }
-        public static void RotateX(_3DModel a,double theta)
+        public static void RotateX(Model3D a,double theta)
         {
-            //theta = (float)(theta * Math.PI / 180.0);
+            //theta = (theta * Math.PI / 180.0);
             for (int i = 0; i < a.points.Count; i++)
             {
                 double y1=((a.points[i].y)*Math.Cos(theta));
@@ -41,13 +41,13 @@ namespace Lec3
 
                 double z2 = ((a.points[i].z) * Math.Cos(theta));
                 double y2 = ((a.points[i].y) * Math.Sin(theta));
-                a.points[i].y = (float)(y1 - z1);
-                a.points[i].z = (float)(y2 + z2);
+                a.points[i].y = (y1 - z1);
+                a.points[i].z = (y2 + z2);
             }
         }
-        public static void RotateY(_3DModel a, double theta)
+        public static void RotateY(Model3D a, double theta)
         {
-            //theta = (float)(theta * Math.PI / 180.0);
+            //theta = (theta * Math.PI / 180.0);
             for (int i = 0; i < a.points.Count; i++)
             {
                 double z1 = ((a.points[i].z) * Math.Cos(theta));
@@ -55,13 +55,13 @@ namespace Lec3
 
                 double x2 = ((a.points[i].x) * Math.Cos(theta));
                 double z2 = ((a.points[i].z) * Math.Sin(theta));
-                a.points[i].z = (float)(z1 - x1);
-                a.points[i].x = (float)(x2 + z2);
+                a.points[i].z = (z1 - x1);
+                a.points[i].x = (x2 + z2);
             }
         }
-        public static void RotateZ(_3DModel a, double theta)
+        public static void RotateZ(Model3D a, double theta)
         {
-            //theta = (float)(theta * Math.PI / 180.0);
+            //theta = (theta * Math.PI / 180.0);
 
             for (int i = 0; i < a.points.Count; i++)
             {
@@ -70,42 +70,31 @@ namespace Lec3
 
                 double y2 = ((a.points[i].y) * Math.Cos(theta));
                 double x2 = ((a.points[i].x) * Math.Sin(theta));
-                a.points[i].x = (float)(x1 - y1);
-                a.points[i].y = (float)(x2 + y2);
+                a.points[i].x = (x1 - y1);
+                a.points[i].y = (x2 + y2);
             }
         }
-        public static void RotateArbitrary(_3DModel L_Pts,
-                                           _3dpoint v1,
-                                           _3dpoint v2,
-                                           float ang)//The list of 3D points will rotate around 2 specific 3D point v1 and v2 using a given angle
+        public static void RotateArbitrary(Model3D a, Point3D p1, Point3D p2, double ang)
         {
-            Transform.RotateX(L_Pts, v1.x * -1);//The X values of the 3D list is translated to have the first 3D point start at 0,0,0
-            Transform.RotateY(L_Pts, v1.y * -1);//The Y values of the 3D list is translated to have the first 3D point start at 0,0,0
-            Transform.RotateZ(L_Pts, v1.z * -1);//The Z values of the 3D list is translated to have the first 3D point start at 0,0,0
+            double oldx = p1.x;
+            double oldy = p1.y;
+            double oldz = p1.z;
+            Translate(a, (float)-(p1.x), (float)-(p1.y), (float)-(p1.z));
 
-            double dx = v2.x - v1.x;//The difference between the X values of the second 3D point and the translated X of the first 3D point
-            double dy = v2.y - v1.y;//The difference between the Y values of the second 3D point and the translated X of the first 3D point
-            double dz = v2.z - v1.z;//The difference between the Z values of the second 3D point and the translated X of the first 3D point
-
-            float theta = (float)Math.Atan2(dy, dx);//Theta is calculated based on the proof in the project files
-            float phi = (float)Math.Atan2(Math.Sqrt(dx * dx + dy * dy), dz);//phi is calculated based on the proof in the project files
-
-            theta = (float)(theta * 180 / Math.PI);//Theta is then converted to radian value as per graphics 1
-            phi = (float)(phi * 180 / Math.PI);//Phi is also converted to radian value
-
-            //To rotate the given 3d list around V1 and V2, the following code lines are used based on the proof in the project file
-            Transform.RotateZ(L_Pts, theta * -1);//Start inverse rotation around Z axis using theta
-            Transform.RotateY(L_Pts, phi * -1);//Start inverse rotation around Y axis using phi
-
-            Transform.RotateZ(L_Pts, ang);//Start rotation around Z axis using ang
-
-            Transform.RotateY(L_Pts, phi * 1);//Start rotation around Y axis using phi
-            Transform.RotateZ(L_Pts, theta * 1);//Start rotation around Z axis using theta
-
-
-            Transform.Translate(L_Pts,0,0, v1.z * 1);//Returns the Z values of v1 to original place
-            Transform.Translate(L_Pts,0, v1.y * 1,0);//Returns the Y values of v1 to original place
-            Transform.Translate(L_Pts, v1.x * 1,0,0);//Returns the X values of v1 to original place
+            double v1 = p1.x - p2.x;
+            double v2 = p1.y - p2.y;
+            double v3 = p1.z - p2.z;
+            double theta = Math.Atan2(v2, v1);
+            //theta = (float)(theta * Math.PI / 180.0);
+            double sq = Math.Sqrt((v2 * v2) + (v1 * v1));
+            double phi = Math.Atan2(sq, v3);
+            //phi = (float)(phi * Math.PI / 180.0);
+            RotateZ(a, -theta);
+            RotateY(a, -phi);
+            RotateZ(a, ang);
+            RotateY(a, phi);
+            RotateZ(a, theta);
+            Translate(a, (float)oldx, (float)oldy, (float)oldz);
         }
     }
 }

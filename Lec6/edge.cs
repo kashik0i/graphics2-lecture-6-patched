@@ -1,17 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 
 namespace Lec3
 {
-    class edge
+    class Edge
     {
-        public int e1, e2;
-        public edge(int e11, int e22)
+        public int i, j;
+        public Color cl=Color.Black;
+
+        public Edge(int i, int j,Color cl)
         {
-            e1 = e11;
-            e2 = e22;
+            this.i = i;
+            this.j = j;
+            this.cl = cl;
         }
     }
 }

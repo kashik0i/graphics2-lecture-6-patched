@@ -7,3 +7,12 @@ C:\Users\amr19\msa\graphics 2\code\Lec_6\Lec6\obj\x86\Debug\Lec6.csproj.Generate
 C:\Users\amr19\msa\graphics 2\code\Lec_6\Lec6\obj\x86\Debug\Lec6.csproj.CoreCompileInputs.cache
 C:\Users\amr19\msa\graphics 2\code\Lec_6\Lec6\obj\x86\Debug\Lec6.exe
 C:\Users\amr19\msa\graphics 2\code\Lec_6\Lec6\obj\x86\Debug\Lec6.pdb
+C:\Users\amr19\source\repos\graphics2-lecture-6-patched\Lec6\bin\Debug\Lec3.exe
+C:\Users\amr19\source\repos\graphics2-lecture-6-patched\Lec6\bin\Debug\Lec3.pdb
+C:\Users\amr19\source\repos\graphics2-lecture-6-patched\Lec6\obj\x86\Debug\Lec6.csproj.AssemblyReference.cache
+C:\Users\amr19\source\repos\graphics2-lecture-6-patched\Lec6\obj\x86\Debug\Lec3.Form1.resources
+C:\Users\amr19\source\repos\graphics2-lecture-6-patched\Lec6\obj\x86\Debug\Lec3.Properties.Resources.resources
+C:\Users\amr19\source\repos\graphics2-lecture-6-patched\Lec6\obj\x86\Debug\Lec6.csproj.GenerateResource.cache
+C:\Users\amr19\source\repos\graphics2-lecture-6-patched\Lec6\obj\x86\Debug\Lec6.csproj.CoreCompileInputs.cache
+C:\Users\amr19\source\repos\graphics2-lecture-6-patched\Lec6\obj\x86\Debug\Lec3.exe
+C:\Users\amr19\source\repos\graphics2-lecture-6-patched\Lec6\obj\x86\Debug\Lec3.pdb
